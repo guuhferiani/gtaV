@@ -455,6 +455,12 @@ body {
 .cat-waste { --color-theme: var(--accent-cyan); --color-theme-glow: var(--accent-cyan); }
 .cat-epsilon { --color-theme: var(--accent-purple); --color-theme-glow: var(--accent-purple); }
 .cat-flight { --color-theme: #f43f5e; --color-theme-glow: #f43f5e; } /* Rose */
+.cat-money { --color-theme: #3b82f6; --color-theme-glow: #3b82f6; } /* Blue */
+.cat-vehicle { --color-theme: #ec4899; --color-theme-glow: #ec4899; } /* Pink */
+.cat-epsilon-car { --color-theme: #6366f1; --color-theme-glow: #6366f1; } /* Indigo */
+.cat-card { --color-theme: #84cc16; --color-theme-glow: #84cc16; } /* Lime */
+.cat-figure { --color-theme: #d946ef; --color-theme-glow: #d946ef; } /* Magenta */
+.cat-jammer { --color-theme: #14b8a6; --color-theme-glow: #14b8a6; } /* Teal */
 
 /* Map Container */
 .map-container {

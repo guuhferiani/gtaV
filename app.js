@@ -46,7 +46,10 @@ const categoryMetadata = {
     'Knife Flight': { class: 'cat-flight', label: 'Voos de Faca', color: '#f43f5e', glow: 'rgba(244, 63, 94, 0.4)' },
     'Money': { class: 'cat-money', label: 'Pacotes Ocultos', color: '#3b82f6', glow: 'rgba(59, 130, 246, 0.4)' },
     'Vehicle Spawn': { class: 'cat-vehicle', label: 'Carros Raros', color: '#ec4899', glow: 'rgba(236, 72, 153, 0.4)' },
-    'Epsilon Car': { class: 'cat-epsilon-car', label: 'Carros Epsilon', color: '#6366f1', glow: 'rgba(99, 102, 241, 0.4)' }
+    'Epsilon Car': { class: 'cat-epsilon-car', label: 'Carros Epsilon', color: '#6366f1', glow: 'rgba(99, 102, 241, 0.4)' },
+    'Playing Card': { class: 'cat-card', label: 'Cartas de Baralho', color: '#84cc16', glow: 'rgba(132, 204, 22, 0.4)' },
+    'Action Figure': { class: 'cat-figure', label: 'Bonecos de Ação', color: '#d946ef', glow: 'rgba(217, 70, 239, 0.4)' },
+    'Signal Jammer': { class: 'cat-jammer', label: 'Bloqueadores de Sinal', color: '#14b8a6', glow: 'rgba(20, 184, 166, 0.4)' }
 };
 
 // Init application
