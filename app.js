@@ -49,7 +49,8 @@ const categoryMetadata = {
     'Epsilon Car': { class: 'cat-epsilon-car', label: 'Carros Epsilon', color: '#6366f1', glow: 'rgba(99, 102, 241, 0.4)' },
     'Playing Card': { class: 'cat-card', label: 'Cartas de Baralho', color: '#84cc16', glow: 'rgba(132, 204, 22, 0.4)' },
     'Action Figure': { class: 'cat-figure', label: 'Bonecos de Ação', color: '#d946ef', glow: 'rgba(217, 70, 239, 0.4)' },
-    'Signal Jammer': { class: 'cat-jammer', label: 'Bloqueadores de Sinal', color: '#14b8a6', glow: 'rgba(20, 184, 166, 0.4)' }
+    'Signal Jammer': { class: 'cat-jammer', label: 'Bloqueadores de Sinal', color: '#14b8a6', glow: 'rgba(20, 184, 166, 0.4)' },
+    'Monkey Mosaic': { class: 'cat-mosaic', label: 'Mosaicos de Macaco', color: '#c084fc', glow: 'rgba(192, 132, 252, 0.4)' }
 };
 
 // Init application

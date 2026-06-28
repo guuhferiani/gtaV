@@ -461,6 +461,7 @@ body {
 .cat-card { --color-theme: #84cc16; --color-theme-glow: #84cc16; } /* Lime */
 .cat-figure { --color-theme: #d946ef; --color-theme-glow: #d946ef; } /* Magenta */
 .cat-jammer { --color-theme: #14b8a6; --color-theme-glow: #14b8a6; } /* Teal */
+.cat-mosaic { --color-theme: #c084fc; --color-theme-glow: #c084fc; } /* Orchid/Purple */
 
 /* Map Container */
 .map-container {
