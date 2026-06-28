@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interativo GTA V - Rastreamento de Colecionáveis 100%</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Mapa interativo do GTA V para rastrear spaceship parts, letter scraps, stunt jumps, e todos os colecionáveis necessários para platinar e obter 100% de conclusão do jogo.">
+    
+    <!-- Leaflet.js Map Library -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+    <!-- Mobile Nav Hamburger Menu Button -->
+    <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Abrir menu">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+        </svg>
+    </button>
+
+    <div class="app-container">
+        
+        <!-- Sidebar Dashboard Controls -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <!-- Custom Map Icon SVG -->
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Los Santos Map</span>
+                </div>
+                <p>Guia de Colecionáveis para 100% / Platina</p>
+                
+                <!-- Map Style Tabs -->
+                <div class="map-styles-tabs">
+                    <div class="map-style-tab active" data-style="road">Estrada</div>
+                    <div class="map-style-tab" data-style="atlas">Atlas</div>
+                    <div class="map-style-tab" data-style="satellite">Satélite</div>
+                </div>
+            </div>
+            
+            <div class="sidebar-content">
+                
+                <!-- Global Progress Card -->
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <span class="progress-title">Progresso Geral</span>
+                        <span class="progress-number" id="overall-progress-text">0/276</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="overall-progress-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <!-- Search Box -->
+                <div class="search-container">
+                    <input type="text" class="search-input" id="search-box" placeholder="Buscar colecionável...">
+                    <!-- Search Icon -->
+                    <svg class="search-icon" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+                    </svg>
+                </div>
+                
+                <!-- Settings Card (Opacity Control) -->
+                <div class="settings-card">
+                    <span class="settings-title">Opacidade dos Coletados</span>
+                    <div class="slider-wrapper">
+                        <input type="range" id="opacity-slider" min="10" max="100" value="55" class="opacity-slider">
+                        <span class="slider-val" id="opacity-val">55%</span>
+                    </div>
+                </div>
+                
+                <!-- Categories Section -->
+                <div>
+                    <div class="categories-header-row">
+                        <h3 class="section-title">Categorias</h3>
+                        <div class="toggle-all-container">
+                            <button id="btn-show-all" class="toggle-all-btn">Mostrar Todas</button>
+                            <button id="btn-hide-all" class="toggle-all-btn">Ocultar Todas</button>
+                        </div>
+                    </div>
+                    <div class="categories-list" id="categories-container">
+                        <!-- Filled dynamically by JavaScript -->
+                    </div>
+                </div>
+                
+            </div>
+        </aside>
+        
+        <!-- Interactive Map Wrapper -->
+        <main class="map-container">
+            <div id="map"></div>
+        </main>
+        
+    </div>
+
+    <!-- Logic Script -->
+    <script src="app.js"></script>
+</body>
+</html>
