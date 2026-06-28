@@ -147,6 +147,24 @@ async function loadLocationsData() {
     }
 }
 
+// Custom category icons rendered inside the map pins (drawn on a 12x12 canvas, translated by [8, 8])
+const categoryIcons = {
+    'Spaceship Part': `<path d="M6 1.5 C6.5 3, 7 5, 7 7.5 L7.5 9 L4.5 9 L5 7.5 C5 5, 5.5 3, 6 1.5 Z M4 7.5 L3.5 9 L2 9.5 L3.5 7 L4 7.5 Z M8 7.5 L8.5 9 L10 9.5 L8.5 7 L8 7.5 Z" fill="#ffffff"/>`,
+    'Letter Scrap': `<path d="M1.5 2.5 h9 v7 h-9 Z M1.5 3.5 l4.5 3 l4.5 -3" stroke="#ffffff" stroke-width="1.2" fill="none" stroke-linejoin="round"/>`,
+    'Stunt Jump': `<path d="M7 1 L2 7.5 h4 L5 11 L10 4.5 H6 L7 1 Z" fill="#ffffff"/>`,
+    'Under the Bridge': `<path d="M1 9.5 C 3 6, 9 6, 11 9.5 L11 11 L9.5 11 C 8 8, 4 8, 2.5 11 L1 11 Z" fill="#ffffff"/>`,
+    'Nuclear Waste': `<path d="M6 4.5 a1.5 1.5 0 1 0 0 3 a1.5 1.5 0 0 0 0 -3 Z M6 1.5 L7.5 4 h-3 Z M2.5 8 L4.5 6.5 l-1 -2 Z M9.5 8 L7.5 6.5 l1 -2 Z" fill="#ffffff"/>`,
+    'Epsilon Tract': `<path d="M2 2.5 h3.5 v7.5 h-3.5 Z M6.5 2.5 h3.5 v7.5 h-3.5 Z M2 3.5 h3.5 M2 5.5 h3.5 M6.5 3.5 h3.5 M6.5 5.5 h3.5" stroke="#ffffff" stroke-width="1.2" fill="none"/>`,
+    'Knife Flight': `<path d="M6 1 L7.5 5.5 L11 7 L7.5 7.5 L6 11 L4.5 7.5 L1 7 L4.5 5.5 Z" fill="#ffffff"/>`,
+    'Money': `<path d="M6 1 v10 M3.5 3.5 C3.5 3.5, 5 2.5, 6 2.5 C7.5 2.5, 8.5 3.5, 8.5 4.5 C8.5 6, 3.5 6, 3.5 7.5 C3.5 8.5, 4.5 9.5, 6 9.5 C7.5 9.5, 8.5 8.5, 8.5 8.5" stroke="#ffffff" stroke-width="1.2" fill="none" stroke-linecap="round"/>`,
+    'Vehicle Spawn': `<path d="M1.5 7.5 l 1 -2 h 7 l 1 2 v 2.5 h -9 Z M3 8.5 a 0.8 0.8 0 1 0 0 0.1 M9 8.5 a 0.8 0.8 0 1 0 0 0.1" fill="#ffffff"/>`,
+    'Epsilon Car': `<path d="M1.5 7.5 l 1 -2 h 7 l 1 2 v 2.5 h -9 Z M3 8.5 a 0.8 0.8 0 1 0 0 0.1 M9 8.5 a 0.8 0.8 0 1 0 0 0.1 M6 2 v3 M4.5 3.5 h3" stroke="#ffffff" stroke-width="1"/>`,
+    'Playing Card': `<path d="M6 1.5 C4.5 4, 2.5 5, 2.5 7.5 C2.5 9.5, 4.5 10.5, 6 9 C7.5 10.5, 9.5 9.5, 9.5 7.5 C9.5 5, 7.5 4, 6 1.5 Z M5 9 L6 11 L7 9 Z" fill="#ffffff"/>`,
+    'Action Figure': `<path d="M6 1.5 a 1.5 1.5 0 1 0 0 3 a 1.5 1.5 0 0 0 0 -3 Z M3 5.5 h6 v2 h-1 v3.5 h-1.5 v-2 h-1 v2 h-1.5 v-3.5 h-1 Z" fill="#ffffff"/>`,
+    'Signal Jammer': `<path d="M6 8 L4.5 11.5 h3 Z M6 5.5 a 1 1 0 1 0 0 2 1 1 0 0 0 0 -2 Z M3 4 C2 5, 2 7, 3 8 M9 4 C10 5, 10 7, 9 8" stroke="#ffffff" stroke-width="1.2" fill="none"/>`,
+    'Monkey Mosaic': `<path d="M6 2.5 a3.5 3.5 0 0 0 -3.5 3.5 c0 2.5, 1.5 4.5, 3.5 4.5 s3.5 -2, 3.5 -4.5 a3.5 3.5 0 0 0 -3.5 -3.5 Z M2.5 4 a1 1 0 1 0 0 2 M9.5 4 a1 1 0 1 0 0 2 M4.5 6.5 a0.5 0.5 0 1 0 0 0.1 M7.5 6.5 a0.5 0.5 0 1 0 0 0.1 M4.5 8.5 c0.5 0.5, 2.5 0.5, 3 0" stroke="#ffffff" stroke-width="1" fill="none"/>`
+};
+
 // Build beautiful SVG icons dynamically
 function getSVGIcon(type, isCollected) {
     const meta = categoryMetadata[type] || { color: '#ffffff' };
@@ -158,6 +176,20 @@ function getSVGIcon(type, isCollected) {
     const shadowColor = isCollected ? 'transparent' : color;
     const filterId = `shadow-${type.replace(/\s+/g, '-')}-${isCollected ? 'col' : 'uncol'}`;
 
+    // Select custom inner icon or fallback to default double circle
+    let innerContent = `
+        <circle cx="14" cy="14" r="6" fill="#0c0d14"/>
+        <circle cx="14" cy="14" r="4" fill="#ffffff"/>
+    `;
+    if (categoryIcons[type]) {
+        innerContent = `
+            <circle cx="14" cy="14" r="8.5" fill="#0c0d14"/>
+            <g transform="translate(8, 8)">
+                ${categoryIcons[type]}
+            </g>
+        `;
+    }
+
     const svgHtml = `
     <svg width="28" height="34" viewBox="0 0 28 34" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: ${opacity}; transform: scale(${scale}); filter: drop-shadow(0 4px 6px rgba(0,0,0,0.45));">
         <defs>
@@ -166,8 +198,7 @@ function getSVGIcon(type, isCollected) {
             </filter>
         </defs>
         <path d="M14 0C6.26801 0 0 6.26801 0 14C0 24.5 14 34 14 34C14 34 28 24.5 28 14C28 6.26801 21.732 0 14 0Z" fill="${color}" filter="url(#${filterId})"/>
-        <circle cx="14" cy="14" r="6" fill="#0c0d14"/>
-        <circle cx="14" cy="14" r="4" fill="#ffffff"/>
+        ${innerContent}
     </svg>
     `;
 
